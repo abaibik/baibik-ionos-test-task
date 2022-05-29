@@ -4,6 +4,9 @@ import {
   FETCH_CITIES_ERROR,
   SET_TIME_PERIOD,
   SET_CURRENT_CITY_ID,
+  FETCH_CITY_INFECTIONS_REQUEST,
+  FETCH_CITY_INFECTIONS_SUCCESS,
+  FETCH_CITY_INFECTIONS_ERROR,
 } from "./actions";
 
 export const initialStateFetchCities = {
@@ -62,6 +65,33 @@ export const SetCurrentCityIdReducer = (
   switch (action.type) {
     case SET_CURRENT_CITY_ID:
       return { ...state, currentCityId: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const initialStateFetchInfections = {
+  infections: [],
+  isFetching: false,
+  error: null,
+};
+
+export const FetchInfectionsReducer = (
+  state = initialStateFetchInfections,
+  action
+) => {
+  switch (action.type) {
+    case FETCH_CITY_INFECTIONS_REQUEST:
+      return { ...state, isFetching: true, error: null };
+    case FETCH_CITY_INFECTIONS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: null,
+        infections: action.payload,
+      };
+    case FETCH_CITY_INFECTIONS_ERROR:
+      return { ...state, isFetching: false, error: action.payload };
     default:
       return state;
   }
