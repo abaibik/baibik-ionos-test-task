@@ -1,0 +1,11 @@
+.rdrDefinedRangesWrapper {
+    display: none;
+}
+
+.rdrDateDisplayWrapper {
+    width: 100%;
+}
+
+h2 {
+    padding-bottom: 2em;
+}

@@ -1,10 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "../features/counter/counterSlice";
-import { FetchCitiesReducer } from "./reducers";
+import { FetchCitiesReducer, SetTimePeriod } from "./reducers";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     cities: FetchCitiesReducer,
+    timePeriod: SetTimePeriod,
   },
 });

@@ -5,6 +5,8 @@ import { store } from "./store/store";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
