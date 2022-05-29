@@ -3,17 +3,16 @@ import {
   FETCH_CITIES_SUCCESS,
   FETCH_CITIES_ERROR,
   SET_TIME_PERIOD,
+  SET_CURRENT_CITY_ID,
 } from "./actions";
 
-export const initialState = {
+export const initialStateFetchCities = {
   cities: [],
-  startDate: {},
-  endDate: {},
   isFetching: false,
   error: null,
 };
 
-export const FetchCitiesReducer = (state = initialState, action) => {
+export const FetchCitiesReducer = (state = initialStateFetchCities, action) => {
   switch (action.type) {
     case FETCH_CITIES_REQUEST:
       return { ...state, isFetching: true, error: null };
@@ -31,16 +30,38 @@ export const FetchCitiesReducer = (state = initialState, action) => {
   }
 };
 
-export const SetTimePeriod = (state = initialState, action) => {
+export const initialStateSetTimePeriod = {
+  startDate: {},
+  endDate: {},
+};
+
+export const SetTimePeriodReducer = (
+  state = initialStateSetTimePeriod,
+  action
+) => {
   switch (action.type) {
     case SET_TIME_PERIOD:
       return {
         ...state,
         startDate: action.payload.startDate,
         endDate: action.payload.endDate,
-        isFetching: false,
-        error: null,
       };
+    default:
+      return state;
+  }
+};
+
+export const initialStateSetCurrentCity = {
+  currentCityId: null,
+};
+
+export const SetCurrentCityIdReducer = (
+  state = initialStateSetCurrentCity,
+  action
+) => {
+  switch (action.type) {
+    case SET_CURRENT_CITY_ID:
+      return { ...state, currentCityId: action.payload };
     default:
       return state;
   }

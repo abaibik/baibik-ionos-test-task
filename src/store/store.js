@@ -1,9 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { FetchCitiesReducer, SetTimePeriod } from "./reducers";
+import {
+  FetchCitiesReducer,
+  SetCurrentCityIdReducer,
+  SetTimePeriodReducer,
+} from "./reducers";
 
 export const store = configureStore({
   reducer: {
     cities: FetchCitiesReducer,
-    timePeriod: SetTimePeriod,
+    timePeriod: SetTimePeriodReducer,
+    currentCityId: SetCurrentCityIdReducer,
   },
 });
