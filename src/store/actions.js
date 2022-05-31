@@ -47,7 +47,7 @@ export const setCurrentCity = (cityId, cityName) => {
 export const fetchCityInfections = (dispatch, getState) => {
   const startDate = moment(getState().timePeriod.startDate);
   const endDate = moment(getState().timePeriod.endDate);
-  const cityId = getState().currentCityId.currentCityId;
+  const cityId = getState().currentCity.currentCityId;
   dispatch({ type: FETCH_CITY_INFECTIONS_REQUEST });
   fetch(
     `${URL}/city_infections?cityId=${cityId}&from=${startDate.format(

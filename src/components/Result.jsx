@@ -1,20 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Spinner, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCityInfections } from "../store/actions";
-import { selectCities, selectCityIdToReport } from "../store/selectors";
+import {
+  selectCities,
+  selectCurrentCity,
+  selectCityInfections,
+} from "../store/selectors";
 
 export const Result = () => {
   const dispatch = useDispatch();
+
+  const currentCityName = useSelector(selectCurrentCity);
+  const cities = useSelector(selectCities);
+  // const { infections, isFetching, error } = useSelector(selectCityInfections);
 
   useEffect(() => {
     dispatch(fetchCityInfections);
   }, [dispatch]);
 
-  const currentCityId = useSelector(selectCityIdToReport);
-  const cities = useSelector(selectCities);
-
-  //   if (loading) {
+  //   if (isFetching) {
   //     return (
   //       <Spinner className="m-5" animation="border" role="status">
   //         <span className="visually-hidden">
@@ -30,7 +35,7 @@ export const Result = () => {
 
   return (
     <div>
-      <h2>Statistics for </h2>
+      <h2>Statistics for {currentCityName}</h2>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
