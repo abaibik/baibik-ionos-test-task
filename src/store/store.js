@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import {
   FetchCitiesReducer,
   FetchInfectionsReducer,
-  SetCurrentCityIdReducer,
+  SetCurrentCityReducer,
   SetTimePeriodReducer,
 } from "./reducers";
 
@@ -10,7 +10,7 @@ export const store = configureStore({
   reducer: {
     cities: FetchCitiesReducer,
     timePeriod: SetTimePeriodReducer,
-    currentCityId: SetCurrentCityIdReducer,
+    currentCity: SetCurrentCityReducer,
     infections: FetchInfectionsReducer,
   },
 });

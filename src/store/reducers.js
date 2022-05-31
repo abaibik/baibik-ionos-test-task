@@ -56,15 +56,20 @@ export const SetTimePeriodReducer = (
 
 export const initialStateSetCurrentCity = {
   currentCityId: null,
+  currentCityName: "",
 };
 
-export const SetCurrentCityIdReducer = (
+export const SetCurrentCityReducer = (
   state = initialStateSetCurrentCity,
   action
 ) => {
   switch (action.type) {
     case SET_CURRENT_CITY_ID:
-      return { ...state, currentCityId: action.payload };
+      return {
+        ...state,
+        currentCityId: action.payload.cityId,
+        currentCityName: action.payload.cityName,
+      };
     default:
       return state;
   }

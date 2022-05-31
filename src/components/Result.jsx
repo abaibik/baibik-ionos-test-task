@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import { Table } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { Spinner, Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchCityInfections } from "../store/actions";
+import { selectCities, selectCityIdToReport } from "../store/selectors";
 
 export const Result = () => {
   const dispatch = useDispatch();
@@ -10,25 +11,35 @@ export const Result = () => {
     dispatch(fetchCityInfections);
   }, [dispatch]);
 
+  const currentCityId = useSelector(selectCityIdToReport);
+  const cities = useSelector(selectCities);
+
+  //   if (loading) {
+  //     return (
+  //       <Spinner className="m-5" animation="border" role="status">
+  //         <span className="visually-hidden">
+  //           The page is loading. Please, wait
+  //         </span>
+  //       </Spinner>
+  //     );
+  //   }
+
+  //   if (error) {
+  //     return <h1>{error}</h1>;
+  //   }
+
   return (
     <div>
+      <h2>Statistics for </h2>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
-            <th>First Name</th>
+            <th>Date</th>
+            <th>Total cases</th>
+            <th>Active cases</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Mark</td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-          </tr>
-          <tr>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
+        <tbody></tbody>
       </Table>
     </div>
   );

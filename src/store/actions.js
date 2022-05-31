@@ -37,10 +37,10 @@ export const setTimePeriod = (date1, date2) => {
   };
 };
 
-export const setCurrentCityId = (cityId) => {
+export const setCurrentCity = (cityId, cityName) => {
   return {
     type: SET_CURRENT_CITY_ID,
-    payload: cityId,
+    payload: { cityId, cityName },
   };
 };
 

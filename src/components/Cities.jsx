@@ -1,8 +1,9 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useCallback, useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { fetchCitiesRequest, setCurrentCityId } from "../store/actions";
+import { fetchCitiesRequest, setCurrentCity } from "../store/actions";
 import { selectCities } from "../store/selectors";
 
 export const Cities = () => {
@@ -18,15 +19,28 @@ export const Cities = () => {
     if (cities.length === 0) {
       return;
     }
-    dispatch(setCurrentCityId(cities[0].cityId));
+    dispatch(setCurrentCity(cities[0].cityId, cities[0].cityName));
   }, [dispatch, cities]);
+
+  const handleChange = useCallback(
+    (value) => {
+      dispatch(setCurrentCity(value.value, value.label));
+    },
+    [dispatch]
+  );
 
   if (error) {
     return <h1>error:{error}</h1>;
   }
 
   if (isFetching) {
-    return <h1>loading</h1>;
+    return (
+      <Spinner className="m-5" animation="border" role="status">
+        <span className="visually-hidden">
+          The page is loading. Please, wait
+        </span>
+      </Spinner>
+    );
   }
 
   const cityOptions = cities.map((city) => ({
@@ -50,9 +64,7 @@ export const Cities = () => {
           closeMenuOnSelect={true}
           isClearable={true}
           isSearchable={true}
-          onChange={(value) => {
-            console.log(value);
-          }}
+          onChange={handleChange}
         />
       </Fragment>
     </div>
