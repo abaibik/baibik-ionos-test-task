@@ -4,4 +4,4 @@ export const selectInfections = (state) => state.infections;
 
 export const selectCurrentCity = (state) => state.currentCity.currentCityName;
 
-export const selectCityInfections = (state) => state.cityInfections;
+export const selectCityInfections = (state) => state.infections;
