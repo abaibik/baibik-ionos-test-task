@@ -5,6 +5,7 @@ import { fetchCityInfections } from "../store/actions";
 import { selectCityInfections, selectCurrentCity } from "../store/selectors";
 import { Chart } from "./Chart";
 import { TableInfections } from "./TableInfections";
+import { useResizeDetector } from "react-resize-detector";
 
 export const Result = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export const Result = () => {
   }, [dispatch]);
 
   const { infections, isFetching, error } = useSelector(selectCityInfections);
+  const { width, ref } = useResizeDetector();
 
   if (isFetching) {
     return (
@@ -32,10 +34,10 @@ export const Result = () => {
   }
 
   return (
-    <div className="container mt-3">
+    <div className="container mt-3" ref={ref}>
       <h2>Statistics for {currentCityName}</h2>
       <TableInfections infections={infections} />
-      <Chart infections={infections} />
+      <Chart infections={infections} width={width} />
     </div>
   );
 };

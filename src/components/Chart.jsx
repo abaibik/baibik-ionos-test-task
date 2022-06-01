@@ -11,7 +11,7 @@ import {
 import moment from "moment";
 import { unix } from "moment";
 
-export const Chart = ({ infections }) => {
+export const Chart = ({ infections, width }) => {
   const data = infections.map((el) => ({
     date: moment(el.date).unix(),
     activeCases: el.activeCases,
@@ -21,10 +21,10 @@ export const Chart = ({ infections }) => {
   }
 
   return (
-    <ResponsiveContainer width="90%" height={350}>
+    <ResponsiveContainer width={width} height={350}>
       <LineChart
-        width={500}
-        height={300}
+        height={350}
+        width={width}
         animationDuration={3000}
         data={data}
         margin={{
@@ -43,7 +43,10 @@ export const Chart = ({ infections }) => {
           type="number"
         />
         <YAxis dataKey="activeCases" name="Cases" />
-        <Tooltip labelFormatter={(el) => unix(el).format("YYYY-MM-DD")} />
+        <Tooltip
+          formatter={(value) => [value, "Active Cases"]}
+          labelFormatter={(el) => unix(el).format("YYYY-MM-DD")}
+        />
         <Line
           type="monotone"
           dataKey="totalCases"
