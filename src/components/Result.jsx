@@ -1,18 +1,21 @@
 import { useEffect } from "react";
-import { Spinner, Table } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCityInfections } from "../store/actions";
-import { selectCurrentCity, selectCityInfections } from "../store/selectors";
+import { selectCityInfections, selectCurrentCity } from "../store/selectors";
+import { Chart } from "./Chart";
+import { TableInfections } from "./TableInfections";
 
 export const Result = () => {
   const dispatch = useDispatch();
 
   const currentCityName = useSelector(selectCurrentCity);
-  const { infections, isFetching, error } = useSelector(selectCityInfections);
 
   useEffect(() => {
     dispatch(fetchCityInfections);
   }, [dispatch]);
+
+  const { infections, isFetching, error } = useSelector(selectCityInfections);
 
   if (isFetching) {
     return (
@@ -29,26 +32,10 @@ export const Result = () => {
   }
 
   return (
-    <div>
+    <div className="container mt-3">
       <h2>Statistics for {currentCityName}</h2>
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Total cases</th>
-            <th>Active cases</th>
-          </tr>
-        </thead>
-        <tbody>
-          {infections.map((el) => (
-            <tr key={el.date}>
-              <td>{el.date}</td>
-              <td>{el.totalCases}</td>
-              <td>{el.activeCases}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <TableInfections infections={infections} />
+      <Chart infections={infections} />
     </div>
   );
 };
