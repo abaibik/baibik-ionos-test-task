@@ -4,13 +4,51 @@
     
 }
 
+.button-get-result {
+    width: 10em;
+    text-align: center;
+    justify-self: center;
+    grid-area: button;
+}
+
+header {grid-area: header;}
+
 h1 {
     margin-top: 3em;
 }
 
-main {
-    display: flex;
-    margin-top: 5em;
-    width: 100%;
+.cities {
+    grid-area: cities;
 }
 
+.time-period {
+    grid-area: time-period;
+}
+
+.grid-even-columns {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "header" 
+    "cities" 
+    "time-period" 
+    "button";
+}
+
+@media only screen and (min-width: 860px) {
+    .grid-even-columns {
+        width: min(800px, 80%);
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "header header" 
+        "cities time-period" 
+        "button button";
+    }
+}
+
+ img {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    z-index: -1;
+} 

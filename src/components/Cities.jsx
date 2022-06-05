@@ -51,8 +51,8 @@ export const Cities = () => {
   const animatedComponents = makeAnimated();
 
   return (
-    <div>
-      <h2>Select a city:</h2>
+    <div className="cities">
+      <h2 className="pt-5">Select a city:</h2>
       <Fragment>
         <Select
           className="basic-single"
