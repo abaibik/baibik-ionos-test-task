@@ -6,6 +6,7 @@ import {
   FETCH_CITIES_ERROR,
   FETCH_CITY_INFECTIONS_REQUEST,
   FETCH_CITY_INFECTIONS_SUCCESS,
+  FETCH_CITY_INFECTIONS_ERROR,
 } from "./actions";
 
 const mockFetch = (status, returnBody, ok = true) => {
@@ -71,6 +72,11 @@ describe("fetchCityInfections", () => {
     global.fetch = unmockedFetch;
   });
 
+  const getState = () => ({
+    timePeriod: { startDate: new Date(), endDate: new Date() },
+    currentCity: { currentCityId: 5 },
+  });
+
   it("fetch infections", () => {
     mockFetch(200, {
       cityName: "Karlsruhe",
@@ -99,11 +105,6 @@ describe("fetchCityInfections", () => {
     });
 
     const mockDispatch = jest.fn();
-
-    const getState = () => ({
-      timePeriod: { startDate: new Date(), endDate: new Date() },
-      currentCity: { currentCityId: 5 },
-    });
 
     return fetchCityInfections(mockDispatch, getState).then(() => {
       expect(mockDispatch.mock.calls.length).toBe(2);
@@ -135,6 +136,19 @@ describe("fetchCityInfections", () => {
           },
         ],
       });
+    });
+  });
+
+  it("fetch infections failure", () => {
+    const mockDispatch = jest.fn();
+
+    mockFetch(400, {}, false);
+
+    return fetchCityInfections(mockDispatch, getState).then(() => {
+      expect(mockDispatch.mock.calls.length).toBe(2);
+      expect(mockDispatch.mock.calls[1][0].type).toBe(
+        FETCH_CITY_INFECTIONS_ERROR
+      );
     });
   });
 });
