@@ -26,7 +26,7 @@ export const TimePeriod = () => {
   );
 
   return (
-    <div className="pt-5 time-period">
+    <div className="time-period">
       <h2>Select a time period:</h2>
       <DateRangePicker
         startDatePlaceholder="Start Date"

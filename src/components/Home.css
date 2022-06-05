@@ -1,7 +1,6 @@
 .container {
     contain: size layout;
     max-width: 1200px;
-    
 }
 
 .button-get-result {
@@ -27,7 +26,8 @@ h1 {
 
 .grid-even-columns {
     display: grid;
-    gap: 1rem;
+    column-gap: 1rem;
+    row-gap: 3rem;
     grid-template-columns: 1fr;
     grid-template-areas: 
     "header" 

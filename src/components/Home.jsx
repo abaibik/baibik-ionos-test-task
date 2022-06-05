@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Cities } from "./Cities";
 import "./Home.css";
+
 import { TimePeriod } from "./TimePeriod";
 
 export const Home = () => {
