@@ -18,7 +18,7 @@ export const fetchCitiesRequest = (dispatch) => {
   dispatch({
     type: FETCH_CITIES_REQUEST,
   });
-  fetch(`${URL}/cities`)
+  return fetch(`${URL}/cities`)
     .then((response) => {
       return response.json();
     })
@@ -55,6 +55,9 @@ export const fetchCityInfections = (dispatch, getState) => {
     )}&until=${endDate.format("YYYY-MM-DD")}`
   )
     .then((response) => {
+      if (!response.ok) {
+        throw new Error("City request failed");
+      }
       return response.json();
     })
     .then((data) => {
