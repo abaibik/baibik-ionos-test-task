@@ -3,14 +3,15 @@ import {
   fetchCityInfections,
   FETCH_CITIES_REQUEST,
   FETCH_CITIES_SUCCESS,
+  FETCH_CITIES_ERROR,
   FETCH_CITY_INFECTIONS_REQUEST,
   FETCH_CITY_INFECTIONS_SUCCESS,
 } from "./actions";
 
-const mockFetch = (status, returnBody) => {
+const mockFetch = (status, returnBody, ok = true) => {
   global.fetch = () =>
     Promise.resolve({
-      ok: true,
+      ok,
       status,
       json: () => Promise.resolve(returnBody),
     });
@@ -50,6 +51,17 @@ describe("fetchCitiesRequest", () => {
           },
         ],
       });
+    });
+  });
+
+  it("fetch cities failure", () => {
+    const mockDispatch = jest.fn();
+
+    mockFetch(400, {}, false);
+
+    return fetchCitiesRequest(mockDispatch).then(() => {
+      expect(mockDispatch.mock.calls.length).toBe(2);
+      expect(mockDispatch.mock.calls[1][0].type).toBe(FETCH_CITIES_ERROR);
     });
   });
 });

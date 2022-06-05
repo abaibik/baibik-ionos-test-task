@@ -20,6 +20,9 @@ export const fetchCitiesRequest = (dispatch) => {
   });
   return fetch(`${URL}/cities`)
     .then((response) => {
+      if (!response.ok) {
+        throw new Error("City request failed");
+      }
       return response.json();
     })
     .then((data) => {
@@ -56,7 +59,7 @@ export const fetchCityInfections = (dispatch, getState) => {
   )
     .then((response) => {
       if (!response.ok) {
-        throw new Error("City request failed");
+        throw new Error("City infections request failed");
       }
       return response.json();
     })
